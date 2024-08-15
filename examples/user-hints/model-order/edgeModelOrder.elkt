@@ -1,0 +1,661 @@
+/*******************************************************************************
+ * Copyright (c) 2024 Kiel University and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+ 
+/*
+// elkex:category
+Model Order 
+
+// elkex:label
+Edge Model Order
+
+// elkex:doc
+Using edge model order, the edge model order should determine the order of the outgoing edges and their ports and make
+that the order of the incoming edges depends on the order of the ports in the previous layer.
+
+Each model is annotated showing whether it is actually possible to solve the resulting dummy node issue. 
+*/
+
+// elkex:graph
+
+algorithm: layered
+elk.direction: RIGHT
+
+considerModelOrder.components: MODEL_ORDER
+aspectRatio: 1.4
+
+node OutgoingEastIncomingWestPorts  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    
+    port p2
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    
+    port p3
+    port p4
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingEastIncomingNorthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingEastIncomingSouthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingEastIncomingEastPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingNorthIncomingWestPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingNorthIncomingNorthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingNorthIncomingSouthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingNorthIncomingEastPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingSouthIncomingWestPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingSouthIncomingNorthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingSouthIncomingSouthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingSouthIncomingEastPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingWestIncomingWestPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingWestIncomingNorthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingWestIncomingSouthPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
+
+node OutgoingWestIncomingEastPorts  {
+  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1.p2
+}
