@@ -28,7 +28,7 @@ algorithm: layered
 elk.direction: RIGHT
 
 considerModelOrder.components: MODEL_ORDER
-aspectRatio: 1.4
+aspectRatio: 1
 
 node OutgoingEastIncomingWestPorts  {
   algorithm: layered
@@ -170,7 +170,6 @@ node OutgoingEastIncomingEastPorts  {
 }
 
 node OutgoingNorthIncomingWestPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -212,7 +211,6 @@ node OutgoingNorthIncomingWestPorts  {
 }
 
 node OutgoingNorthIncomingNorthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -254,7 +252,6 @@ node OutgoingNorthIncomingNorthPorts  {
 }
 
 node OutgoingNorthIncomingSouthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -296,7 +293,6 @@ node OutgoingNorthIncomingSouthPorts  {
 }
 
 node OutgoingNorthIncomingEastPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -338,7 +334,6 @@ node OutgoingNorthIncomingEastPorts  {
 }
 
 node OutgoingSouthIncomingWestPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -380,7 +375,6 @@ node OutgoingSouthIncomingWestPorts  {
 }
 
 node OutgoingSouthIncomingNorthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -422,7 +416,6 @@ node OutgoingSouthIncomingNorthPorts  {
 }
 
 node OutgoingSouthIncomingSouthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -464,7 +457,6 @@ node OutgoingSouthIncomingSouthPorts  {
 }
 
 node OutgoingSouthIncomingEastPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -506,7 +498,6 @@ node OutgoingSouthIncomingEastPorts  {
 }
 
 node OutgoingWestIncomingWestPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -548,7 +539,6 @@ node OutgoingWestIncomingWestPorts  {
 }
 
 node OutgoingWestIncomingNorthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -590,7 +580,6 @@ node OutgoingWestIncomingNorthPorts  {
 }
 
 node OutgoingWestIncomingSouthPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -632,7 +621,6 @@ node OutgoingWestIncomingSouthPorts  {
 }
 
 node OutgoingWestIncomingEastPorts  {
-  // FIXME The problem is that the dummy nodes are sorted badly since we cannot solve how to order them.
   algorithm: layered
   elk.direction: RIGHT
   
@@ -671,4 +659,742 @@ node OutgoingWestIncomingEastPorts  {
   
   edge n1.p1 -> n2.p4
   edge n2.p3 -> n1.p2
+}
+
+node OutgoingEastIncomingWestPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+  }
+    
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    
+    port p2
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    
+    port p3
+    port p4
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingEastIncomingNorthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingEastIncomingSouthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingEastIncomingEastPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    
+    port p1
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    
+    port p2
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingNorthIncomingWestPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingNorthIncomingNorthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingNorthIncomingSouthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingNorthIncomingEastPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingSouthIncomingWestPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingSouthIncomingNorthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingSouthIncomingSouthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingSouthIncomingEastPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingWestIncomingWestPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: WEST
+    }
+    port p4 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingWestIncomingNorthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: NORTH
+    }
+    port p4 {
+      ^port.side: NORTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingWestIncomingSouthPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: SOUTH
+    }
+    port p4 {
+      ^port.side: SOUTH
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
+}
+
+node OutgoingWestIncomingEastPortsMulti  {
+  algorithm: layered
+  elk.direction: RIGHT
+  
+  cycleBreaking.strategy: MODEL_ORDER
+  considerModelOrder.strategy: PREFER_EDGES
+  crossingMinimization.strategy: NONE
+  crossingMinimization.greedySwitch.type: OFF
+  portModelOrder: true
+    
+  
+  node n1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p1 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n1_1 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p2 {
+      ^port.side: WEST
+    }
+    
+  }
+  
+  node n2 {
+    layout [size: 20, 20]
+    portConstraints: FIXED_SIDE
+    
+    port p3 {
+      ^port.side: EAST
+    }
+    port p4 {
+      ^port.side: EAST
+    }
+    
+  }
+  
+  edge n1.p1 -> n2.p4
+  edge n2.p3 -> n1_1.p2
 }
