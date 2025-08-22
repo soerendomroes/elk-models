@@ -1,0 +1,150 @@
+/*******************************************************************************
+ * Copyright (c) 2025 Kiel University and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+
+/*
+// elkex:category
+Labels > Node
+
+// elkex:label
+Node Label and Parent Size
+
+// elkex:doc
+The example illustrates how one can configure parent nodes to consider the size of their labels.
+The layout option `nodeLabels.placement` is a combination of three components:
+the vertical alignment, the horizontal alignment, and whether the label should be placed inside (the only option considered in this example) or outside of the node.
+Not every combination makes sense though.
+A label placed on the outside cannot be centered in both dimensions, for instance.
+
+The option can either be set for a node or for each label individually.
+Here, I, however, only set it on the node.
+
+However, only setting the node label placement does not automatically reserve space for the label.
+The option `nodeSize.constraints: NODEL_LABELS` has to be used for that.
+
+Here, I show how the different placements affects the size of the parent node.
+Centering a label inside a node does not change the size of the node.
+However, if a label is placed at the top or bottom of a node, the node has to reserve space for it.
+The same is true for labels placed at the top left or top right of a node.
+The option `nodeSize.options: ASYMMETRICAL` can be used to disable
+the automatic adjustment of the node size.
+However, this option only works for nodes without children and not for parent nodes.
+Additionally, whether the parent node reserves space for the label depends on the layout algorithm used: Only ELK layered supports this option fully, while other algorithms may not support it at all or only partially.
+
+The layout algorithm computes a position for the top-left corner of the label,
+relative to the top-left corner of the parent node.
+This has to be considered whenever labels are positioned with a different reference point,
+which is the default behavior of SVGs, for instance.
+Additionally note that the layout algorithm is not able to compute the dimensions of a label,
+as it isn't aware of the used font size and font family.
+*/
+
+// elkex:graph
+elk.algorithm: rectpacking // Only for presentation
+// Please note that the text size estimation in elklive is not accurate and that the label sizes set here are only estimates
+node childWithLabelCenter {
+	nodeLabels.placement: "INSIDE H_CENTER V_CENTER"
+	nodeSize.constraints: "NODE_LABELS"
+	label "childWithLabelCenter" {
+		layout [size: 145, 12]
+	}
+	label "childWithLabelCenter2" {
+		layout [size: 150, 12]
+	}
+}
+
+node childWithLabelTopLeft {
+	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reverse space on the opposite site
+	nodeSize.constraints: "NODE_LABELS"
+	label "childWithLabelTopLeft" {
+		layout [size: 145, 12]
+	}
+	label "childWithLabelTopLeft2" {
+		layout [size: 150, 12]
+	}
+}
+
+node childWithLabelTopLeftAsymmetric {
+	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reverse space on the opposite site ...
+	nodeSize.options: ASYMMETRICAL				// .. which is disabled here.
+	nodeSize.constraints: "NODE_LABELS"
+	label "childWithLabelTopLeftAsymmetric" {
+		layout [size: 230, 12]
+	}
+	label "childWithLabelTopLeftAsymmetric2" {
+		layout [size: 235, 12]
+	}
+}
+
+node parentWithLabelCenter {
+	elk.algorithm: layered // The default algorithm supports these options, while other algorithm do not
+	// The label does not respect where the child nodes are placed since the labels should be centered
+	nodeLabels.placement: "INSIDE H_CENTER V_CENTER"
+	nodeSize.constraints: "NODE_LABELS MINIMUM_SIZE"
+	label "parentWithLabelCenter" {
+		layout [size: 160, 12]
+	}
+	label "parentWithLabelCenter2" {
+		layout [size: 160, 12]
+	}
+
+	node n1
+
+	node n2
+}
+
+node parentWithLabelSpaceTop {
+	// elk.algorithm: rectpacking // Not every algorithm supports these options fully as it is the case for the default ELK layered algorithm
+	// The node reserves space at the top for the top label
+	nodeLabels.placement: "INSIDE H_CENTER V_TOP"
+	nodeSize.constraints: "NODE_LABELS MINIMUM_SIZE"
+	label "parentWithLabelTop" {
+		layout [size: 135, 12]
+	}
+	label "parentWithLabelTop2" {
+		layout [size: 140, 12]
+	}
+
+	node n1
+
+	node n2
+}
+
+node parentWithLabelSpaceBottom {
+	// The node reserves space at the bottom for the bottom label
+	nodeLabels.placement: "INSIDE H_CENTER V_BOTTOM"
+	nodeSize.constraints: "NODE_LABELS MINIMUM_SIZE"
+	label "parentWithLabelBottom" {
+		layout [size: 160, 12]
+	}
+	label "parentWithLabelBottom2" {
+		layout [size: 165, 12]
+	}
+
+	node n1
+
+	node n2
+}
+
+node parentWithLabelSpaceTopLeft {
+	// The node reserves space at the bottom for the bottom label
+	nodeLabels.placement: "INSIDE H_LEFT V_TOP"
+	nodeSize.constraints: "NODE_LABELS MINIMUM_SIZE"
+	nodeSize.options: ASYMMETRICAL // This option only works for nodes with children
+	label "parentWithLabelSpaceTopLeft" {
+		layout [size: 200, 12]
+	}
+	label "parentWithLabelSpaceTopLeft2" {
+		layout [size: 205, 12]
+	}
+
+	node n1
+
+	node n2
+}
