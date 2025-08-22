@@ -26,7 +26,7 @@ The option can either be set for a node or for each label individually.
 Here, I, however, only set it on the node.
 
 However, only setting the node label placement does not automatically reserve space for the label.
-The option `nodeSize.constraints: NODEL_LABELS` has to be used for that.
+The option `nodeSize.constraints: NODE_LABELS` has to be used for that.
 
 Here, I show how the different placements affects the size of the parent node.
 Centering a label inside a node does not change the size of the node.
@@ -60,7 +60,7 @@ node childWithLabelCenter {
 }
 
 node childWithLabelTopLeft {
-	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reverse space on the opposite site
+	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reserves space on the opposite side
 	nodeSize.constraints: "NODE_LABELS"
 	label "childWithLabelTopLeft" {
 		layout [size: 145, 12]
@@ -71,7 +71,7 @@ node childWithLabelTopLeft {
 }
 
 node childWithLabelTopLeftAsymmetric {
-	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reverse space on the opposite site ...
+	nodeLabels.placement: "INSIDE H_LEFT V_TOP" // This reserves space on the opposite side ...
 	nodeSize.options: ASYMMETRICAL				// .. which is disabled here.
 	nodeSize.constraints: "NODE_LABELS"
 	label "childWithLabelTopLeftAsymmetric" {
@@ -133,7 +133,7 @@ node parentWithLabelSpaceBottom {
 }
 
 node parentWithLabelSpaceTopLeft {
-	// The node reserves space at the bottom for the bottom label
+	// The node reserves space at the top for the top-left label
 	nodeLabels.placement: "INSIDE H_LEFT V_TOP"
 	nodeSize.constraints: "NODE_LABELS MINIMUM_SIZE"
 	nodeSize.options: ASYMMETRICAL // This option only works for nodes with children
